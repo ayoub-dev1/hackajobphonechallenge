@@ -1,0 +1,82 @@
+    <p-dataView #dv [value]="contacts" [paginator]="false" [rows]="20" paginatorPosition="both" filterBy="name"
+    [sortField]="name" [sortOrder]="sortOrder">
+
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey"  placeholder="Sort By" (onChange)="onSortChange()" [style]="{'min-width':'140px'}">
+                        
+                    </p-dropdown>
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container">
+                    <div style="position:relative">
+                        <input type="search" pInputText placeholder="Search by name" (keyup)="dv.filter($event.target.value)">
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-md-4" style="text-align:right">
+                    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                </div>
+            </div>
+        </div>
+    </p-header>
+
+
+    <ng-template let-contact pTemplate="listItem">
+        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+            <div class="ui-g-12 ui-md-3" style="text-align:center">
+                <img src="assets/images/hackajob_challenge.png">
+            </div>
+            <div class="ui-g-12 ui-md-8 car-details">
+                <div class="ui-g">
+                    <div class="ui-g-2 ui-sm-6">Name: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contact.name}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">Phone: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contact.phone_number}}</b></div>
+
+                    <div class="ui-g-2 ui-sm-6">address: </div>
+                    <div class="ui-g-10 ui-sm-6"><b>{{contact.address}}</b></div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-1 search-icon">
+                <button pButton type="button" icon="pi pi-search" (click)="selectContact($event, contact)"></button>
+            </div>
+        </div>
+    </ng-template>
+
+
+    <ng-template let-contact pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="contact.name" [style]="{'text-align':'center'}">
+                <img src="assets/images/hackajob_challenge.png" width="60">
+
+                <div class="car-detail">{{contact.phone_number}}</div>
+                <hr class="ui-widget-content" style="border-top:0">
+                <!-- <button pButton type="button" icon="pi pi-search" (click)="selectContact($event, contact)" style="margin-top:0"></button> -->
+            </p-panel>
+        </div>
+    </ng-template>
+   
+</p-dataView>
+
+
+
+
+<p-dialog header="Contact Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '225px'}"  (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedContact">
+        <div class="ui-g-12" style="text-align:center">
+            <img src="assets/images/hackajob_challenge.png">
+        </div>
+        <div class="ui-g-4">name: </div>
+        <div class="ui-g-8">{{selectedContact.name}}</div>
+
+        <div class="ui-g-4">phone Number: </div>
+        <div class="ui-g-8">{{selectedContact.phone_number}}</div>
+
+        <div class="ui-g-4">Address: </div>
+        <div class="ui-g-8">{{selectedContact.address}}</div>
+
+      
+    </div>
+</p-dialog>
