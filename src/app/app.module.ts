@@ -18,6 +18,7 @@ import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {DialogModule} from 'primeng/dialog';
     NavbarComponent,
     FooterComponent,
     ListcontactComponent,
+    HomeComponent,
 
   ],
 
